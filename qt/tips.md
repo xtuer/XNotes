@@ -138,7 +138,7 @@ window.show();
 // 进入局部事件循环，阻塞代码继续往下走，窗口关闭时结束此局部事件循环，控制权交还给 QApplication
 // The event loop returns from the call to quit().
 QEventLoop loop;
-connect(&window, &TopWindow::aboutClose, &loop, &QEventLoop::quit);
+connect(&window, &TopWindow::aboutToClose, &loop, &QEventLoop::quit);
 loop.exec();
 
 qDebug() << "Final";
@@ -164,8 +164,8 @@ void UiUtil::centerWindow(QWidget *window) {
 ## 从 Layout 中删除 Widget
 
 ```cpp
-1. widget->deleteLater();  // 删除 widget，会自动把它从 layout 中删除，也会删除它相关的 QLayoutItem
-2. layout->removeWidget(); // 会把 widget 和它相关的 QLayoutItem 从 layout 中删除，需要自己 delete widget
+1. widget->deleteLater();       // 删除 widget，会自动把它从 layout 中删除，也会删除它相关的 QLayoutItem
+2. layout->removeWidget(wiget); // 会把 widget 和它相关的 QLayoutItem 从 layout 中删除，需要自己 delete widget
 ```
 
 > After looking in the source code: `removeWidget()` method also remowes according QLayoutItem. It's a pity that it is not well documented.
@@ -187,6 +187,35 @@ void UiUtils::clearLayout(QLayout *layout) {
         }
     }
 }
+```
+
+## QMap 初始化
+
+`QMap` 可以使用 `{}` 进行初始化:
+
+```cpp
+QMap<QString, QString> map = {
+    { "1", "One" },
+    { "2", "Two" },
+    { "3", "Three" },
+};
+
+map.insert("4", "Four");
+```
+
+## 创建目录
+
+```cpp
+QDir dir("/Users/Biao/Desktop/a/b/c");
+dir.mkpath("."); // mkpath 需要一个参数，所以传入了 . 表示 dir 自己
+```
+
+## QString 控制数字格式
+
+```cpp
+// 10 进制，2 位，不足的前面补齐 0
+// max 为 8 时输出 08
+QString("%1").arg(max, 2, 10, QChar('0')); 
 ```
 
 

@@ -45,6 +45,10 @@ hr, .markdown-section hr {
     font-weight: normal !important;
 }
 
+.gitbook-link {
+    display: none !important;
+}
+
 #goTop {
     display: none;
 }

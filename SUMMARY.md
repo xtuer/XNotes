@@ -79,6 +79,7 @@
     * [QSignalMapper](qt/qsignalmapper.md)
     * [QSS](qt/qss.md)
     * [QChart 折线性能](qt/curve-opengl.md)
+    * [QChart](qt/chart.md)
 * 设计模式
     * [设计模式原则](principle.md)
     * [设计模式原则 SOLID](solid.md)
